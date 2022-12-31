@@ -11,7 +11,6 @@ if not status then
   return
 end
 
--- only use null-ls for formatting
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
     bufnr = bufnr,
@@ -73,8 +72,11 @@ null_ls.setup({
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.shfmt,
+    -- LaTeX
+    null_ls.builtins.formatting.latexindent,
+    null_ls.builtins.diagnostics.chktex,
   },
-  -- run formatter on file save
+  -- Run formatter on file save
   on_attach = on_attach,
 })
 

@@ -3,14 +3,16 @@
 return {
   -- LaTeX: Generic template with titlepage and TOC
   s(
-    "homework",
+    "assignment",
     fmt(
       [[
             \documentclass{{article}}
+            % Replace `letterpaper' with `a4paper' for UK/EU standard size
+            \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{{geometry}}
 
             \usepackage{{graphicx, float}}\graphicspath{{./images/}}  
-            \usepackage[style=german]{{csquotes}} % Required for cool quotes
-            \usepackage{{hyperref}}\hypersetup{{hidelinks}} % Required for clickable TOC
+            \usepackage[style=german]{{csquotes}}
+            \usepackage{{hyperref}}\hypersetup{{hidelinks}}
             \usepackage{{polyglossia}}\setmainlanguage{{lithuanian}}\setotherlanguages{{english}}
            
             \title{{

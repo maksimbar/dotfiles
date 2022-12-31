@@ -86,13 +86,16 @@ return packer.startup(function(use)
     end,
   })
 
-  -- treesitter
+  -- Treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
     run = function()
       require("nvim-treesitter.install").update({ with_sync = true })
     end,
   })
+
+  -- Colorizer
+  use("norcalli/nvim-colorizer.lua")
 
   if packer_bootstrap then
     require("packer").sync()
