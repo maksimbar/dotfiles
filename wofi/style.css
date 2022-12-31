@@ -1,0 +1,55 @@
+@import "/home/max/.config/sway-theme/everforest/base16.css";
+
+window {
+  margin: 0px;
+  border: 2px solid @base01;
+  border-radius: 5px;
+  background-color: @base00;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+#input {
+  margin: 5px;
+  border: 1px solid @base01;
+  color: @base04;
+  background-color: @base00;
+}
+
+#input image {
+  color: @base04;
+}
+
+#inner-box {
+  margin: 5px;
+  border: none;
+  background-color: @base00;
+}
+
+#outer-box {
+  margin: 5px;
+  border: none;
+  background-color: @base00;
+}
+
+#scroll {
+  margin: 0px;
+  border: none;
+}
+
+#text {
+  margin: 5px;
+  border: none;
+  color: @base04;
+}
+
+#entry:selected {
+  background-color: @base0B;
+  font-weight: normal;
+}
+
+#text:selected {
+  background-color: @base0B;
+  font-weight: normal;
+  color: @base00;
+}
