@@ -1,0 +1,19 @@
+max-history=5
+max-visible=3
+
+border-color=#503946
+background-color=#2b3339
+text-color=#fff9e8
+
+anchor=bottom-right
+font=monospace 10
+width=350
+margin=0,20,20
+padding=10
+border-size=2
+border-radius=5
+default-timeout=10000
+group-by=summary
+
+[grouped]
+format=<b>%s</b>\n%b

@@ -1,0 +1,87 @@
+{
+
+    "bar_id": "bar-0",
+    "ipc": true,
+    "layer": "bottom",
+    "position": "top",
+    "modules-left":["sway/workspaces"],
+    "modules-right": ["tray","network#wifi","backlight","battery", "pulseaudio#sink","pulseaudio#source","sway/language","memory","custom/gammastep","custom/pomodoro","clock"],
+
+   "sway/window": {
+        "max-length": 60,
+        "tooltip": false
+    },
+
+    "memory": {
+    "format": " {used:0.1f}G",
+    "states": {
+        "warning": 80,
+        "critical": 95
+        }
+    },
+
+   "clock": {
+   "format": " {:%I:%M %p}",
+   "tooltip-format": "{:%a %d %b - %I:%M %p}",
+   "on-click": {}
+    },
+
+    "sway/language": {
+        "format": " {short}",
+        "on-click": "swaymsg input 'type:keyboard' xkb_switch_layout next",
+    },
+
+    "battery": {
+        "states": {
+            	"warning": 30,
+            	"critical": 15
+        	},
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-full": " {capacity}%",
+        "format-icons": ["","",""]
+
+	},
+
+	"pulseaudio#sink": {
+		"format": "{icon} {volume}%",
+        "format-muted": "ﱝ",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "墳",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+        "pulseaudio#source": {
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%",
+        "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +1%"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-alt-click": "click-right",
+        "format-icons": [""],
+        "on-scroll-down": "light -A 1",
+        "on-scroll-up": "light -U 1"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 18
+    },
+
+    "custom/gammastep": {
+      "format": " {}",
+      "interval": 180,
+      "exec": "~/.local/bin/gammastep-temp.sh"
+  },
+
+}

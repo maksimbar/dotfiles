@@ -1,0 +1,252 @@
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP=sway
+
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $laptop eDP-1
+set $hdmi HDMI-A-1
+
+set $term kitty
+
+set $wofi ~/.local/bin/launch-wofi.sh
+set $tofi ~/.local/bin/launch-tofi.sh
+set $poweroff ~/.local/bin/poweroff.sh
+set $getsnippets cat ~/.local/share/snippets | tofi --config ~/.config/tofi/snippets | wl-copy
+set $writesnippet ~/.local/bin/snippets.sh
+set $hyprpicker ~/.local/bin/hyprpicker.sh
+set $vim-cheatsheet kitty nvim ~/Documents/vim-cheatsheet.md
+
+output {
+    $hdmi pos 1920 0 res 1920x1080
+    $laptop pos 0 0 res 1920x1080
+    * background ~/.config/sway-theme/everforest/everforest.jpg fill
+}
+
+bindswitch {
+    --locked lid:on output $laptop disable
+    --locked lid:off output $laptop enable
+}
+
+exec swayidle -w \
+          timeout 600 'swaylock -f' \
+          before-sleep 'swaylock -f'
+
+input type:touchpad {
+    dwt enabled
+    natural_scroll enabled
+    tap enabled
+    middle_emulation enabled
+}
+
+input type:keyboard {
+    xkb_capslock disabled
+    xkb_variant ltcode,
+    xkb_layout lt,ru
+}
+
+assign [class="jetbrains-clion"] 1
+assign [class="code-oss"] 1
+
+for_window [app_id="google-chrome"] move to workspace 3
+for_window [app_id="anki"] move to workspace 5, floating enable, resize set 70 ppt 70 ppt
+for_window [class="discord"] move to workspace 9
+for_window [app_id="thunderbird"] move to workspace 10
+
+set $ps1 Print
+set $ps2 Control+Print
+set $ps3 Alt+Print
+set $ps4 Alt+Control+Print
+set $psf $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
+
+bindsym --to-code {
+    $ps1 exec grim -g "$(slurp)" - | swappy -f -
+    $ps2 exec grim -g "$(slurp)" - | wl-copy
+    $ps3 exec grim $psf
+    $ps4 exec grim -g "$(slurp)" $psf
+}
+
+workspace {
+  1 output $hdmi
+  2 output $hdmi
+  3 output $hdmi
+  8 output $laptop $hdmi
+  9 output $laptop $hdmi
+}
+
+# bind XF86 keys
+bindsym --to-code {
+    # volume controls
+    XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% # increase sound volume
+    XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% # decrease sound volume
+    XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # toggle mute sound
+
+    # sreen brightness controls
+    XF86MonBrightnessUp exec light -T 1.4  # increase screen brightness
+    XF86MonBrightnessDown exec light -T 0.72  # decrease screen brightness
+
+    # mute mic
+    XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+}
+
+#waybar
+bar {
+  swaybar_command waybar
+  workspace_buttons yes
+}
+
+# different window layout
+exec_always autotiling
+
+exec {
+    # notifications
+    mako
+    # blue light
+    gammastep
+    # touchpad gestures
+    libinput-gestures-setup start
+    # enable BOSE controls
+    mpris-proxy
+    # better sounding mic
+    easyeffects --gapplication-service
+}
+
+# toggle floating and between floating and other windows
+bindsym --whole-window $mod+BTN_MIDDLE floating toggle
+
+bindsym --to-code {
+
+    # vim cheat sheet 
+    F12 exec $vim-cheatsheet
+
+    # switch language
+    $mod+space exec swaymsg input type:keyboard xkb_switch_layout next
+
+    # toggle suspend/poweroff/reboot tofi menu
+    $mod+Shift+x exec $poweroff
+
+    # get snippets
+    $mod+bracketleft exec $getsnippets
+
+    # write snippet
+    $mod+bracketright exec $writesnippet
+
+    # ranger
+    $mod+r exec kitty -e ranger
+
+    # thunderbird
+    $mod+m exec thunderbird
+
+    # telegram
+    $mod+Shift+t exec telegram-desktop
+
+    # terminal
+    $mod+Return exec $term
+
+    # reload this config file
+    $mod+Shift+r reload
+
+    # calendar
+    $mod+Shift+c exec kitty calcure
+
+    # launch firefox
+    $mod+Shift+w exec firefox
+
+    # kill focused window
+    $mod+q kill
+
+    # launch wofi
+    $mod+Tab exec $wofi
+
+    # launch color picker
+    $mod+p exec hyprpicker -a
+
+    # select color picker with format selection via tofi
+    $mod+Shift+p exec $hyprpicker
+
+    $mod+$left focus left
+    $mod+$down focus down
+    $mod+$up focus up
+    $mod+$right focus right
+
+    $mod+Left focus left
+    $mod+Down focus down
+    $mod+Up focus up
+    $mod+Right focus right
+
+    $mod+Shift+$left move left
+    $mod+Shift+$down move down
+    $mod+Shift+$up move up
+    $mod+Shift+$right move right
+
+    $mod+Shift+Left move left
+    $mod+Shift+Down move down
+    $mod+Shift+Up move up
+    $mod+Shift+Right move right
+
+    # switch to workspace
+    $mod+1 workspace number 1
+    $mod+2 workspace number 2
+    $mod+3 workspace number 3
+    $mod+4 workspace number 4
+    $mod+5 workspace number 5
+    $mod+6 workspace number 6
+    $mod+7 workspace number 7
+    $mod+8 workspace number 8
+    $mod+9 workspace number 9
+    $mod+0 workspace number 10
+
+    # move focused container to workspace
+    $mod+Shift+1 move container to workspace number 1
+    $mod+Shift+2 move container to workspace number 2
+    $mod+Shift+3 move container to workspace number 3
+    $mod+Shift+4 move container to workspace number 4
+    $mod+Shift+5 move container to workspace number 5
+    $mod+Shift+6 move container to workspace number 6
+    $mod+Shift+7 move container to workspace number 7
+    $mod+Shift+8 move container to workspace number 8
+    $mod+Shift+9 move container to workspace number 9
+    $mod+Shift+0 move container to workspace number 10
+
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    $mod+b splith
+    $mod+v splitv
+
+    # make current focus fullscreen
+    $mod+f fullscreen
+
+    # toggle floating and between floating and other windows
+    $mod+Shift+f floating toggle
+
+   # $mod+Shift+s focus mode_toggle
+    $mod+Shift+o resize shrink width 50px
+    $mod+Shift+y resize grow width 50px
+    $mod+Shift+u resize shrink height 50px
+    $mod+Shift+i resize grow height 50px
+
+    # scatchpad
+    $mod+Shift+n move scratchpad
+    $mod+Shift+m scratchpad show
+
+}
+
+include ~/.config/sway-theme/everforest/base16.config
+
+#                       Border  BG      Text    Ind     Child Border
+client.focused          $base05 $base0B $base00 $base0B $base0B
+client.focused_inactive $base01 $base01 $base05 $base01 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+
+default_border pixel 3
+gaps outer 5
+gaps inner 5
+smart_borders on
+smart_gaps on
+
+include /etc/sway/config.d/*
