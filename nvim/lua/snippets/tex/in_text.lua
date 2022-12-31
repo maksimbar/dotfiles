@@ -1,13 +1,5 @@
 ---@diagnostic disable: undefined-global
 
-local tex = {}
-tex.in_mathzone = function()
-  return vim.fn["vimtex#syntax#in_mathzone"]() == 1
-end
-tex.in_text = function()
-  return not tex.in_mathzone()
-end
-
 local rec_ls
 rec_ls = function()
   return sn(nil, {
@@ -30,7 +22,7 @@ return {
     t({ "}", "\t\\label{" }),
     i(3),
     t({ "}", "\\end{figure}" }),
-  }, { condition = in_text }),
+  }),
   -- LaTeX: Ordered list
   s("ol", {
     t({ "\\begin{enumerate}", "\t\\item " }),
@@ -38,7 +30,7 @@ return {
     d(2, rec_ls, {}),
     t({ "", "\\end{enumerate}" }),
     i(0),
-  }, { condition = in_text }),
+  }),
   -- LaTeX: Unordered list
   s("ul", {
     t({ "\\begin{itemize}", "\t\\item " }),
@@ -46,38 +38,35 @@ return {
     d(2, rec_ls, {}),
     t({ "", "\\end{itemize}" }),
     i(0),
-  }, { condition = in_text }),
+  }),
   -- LaTeX: Section
   s("sec", {
-    c(1, {
-      t("\\section{"),
-      t("\\section*{"),
-    }),
-    i(0),
+    t("\\section{"),
+    i(1),
     t("}"),
-  }, { condition = in_text }),
+  }),
   -- LaTeX: Subsection
   s("ssec", {
-    c(1, {
-      t("\\subsection{"),
-      t("\\subsection*{"),
-    }),
-    i(0),
+    t("\\subsection{"),
+    i(1),
     t("}"),
-  }, { condition = in_text }),
+  }),
   -- LaTeX: Subsubsection
   s("sssec", {
-    c(1, {
-      t("\\subsubsection{"),
-      t("\\subsubsection*{"),
-    }),
-    i(0),
+    t("\\subsubsection{"),
+    i(1),
     t("}"),
-  }, { condition = in_text }),
+  }),
+  -- LaTeX: Figure
+  s("fig", {
+    t({ "\\begin{figure}[H]", "" }),
+    i(1),
+    t({ "", "\\end{figure}" }),
+  }),
   -- LaTeX: Reference
   s("ref", {
     t("(žr. \\ref{"),
     i(1),
     t("} pav.)"),
-  }, { condition = in_text }),
+  }),
 }

@@ -1,21 +1,6 @@
 ---@diagnostic disable: undefined-global
 
 return {
-  -- Markdown: Definition comment tag
-  s(
-    "dudaanj",
-    fmt(
-      [[
-            <!-- Definition: {} -->
-            > **{}:** {}
-        ]],
-      {
-        i(1),
-        rep(1),
-        i(0),
-      }
-    )
-  ),
   -- Markdown: Image
   s("img", {
     t("![](./"),

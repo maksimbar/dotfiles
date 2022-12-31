@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 vim.opt.termguicolors = true
 
 vim.g.everforest_background = "soft"

@@ -1,15 +1,13 @@
 ---@diagnostic disable: undefined-global
 
 return {
+  -- LaTeX: Generic template with titlepage and TOC
   s(
     "homework",
     fmt(
       [[
             \documentclass{{article}}
 
-            \usepackage{{fancyhdr}} % Required for custom headers
-            \usepackage{{lastpage}} % Required to determine the last page for the footer
-            \usepackage{{extramarks}} % Required for headers and footers
             \usepackage{{graphicx, float}}\graphicspath{{./images/}}  
             \usepackage[style=german]{{csquotes}} % Required for cool quotes
             \usepackage{{hyperref}}\hypersetup{{hidelinks}} % Required for clickable TOC
@@ -40,7 +38,6 @@ return {
         i(2, "Subject name"),
         i(3, "Name"),
       }
-    ),
-    { condition = in_text }
+    )
   ),
 }

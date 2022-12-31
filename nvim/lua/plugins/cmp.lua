@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 local status, cmp = pcall(require, "cmp")
 if not status then
   return
@@ -10,7 +12,6 @@ end
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
--- Setup nvim-cmp.
 cmp.setup({
   snippet = {
     expand = function(args)

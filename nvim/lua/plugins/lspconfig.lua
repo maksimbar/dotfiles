@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 require("mason").setup(settings)
 require("mason-lspconfig").setup({
   ensure_installed = servers,

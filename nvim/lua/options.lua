@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 -- Visual
 vim.o.conceallevel = 0 -- Don't hide quotes in markdown
 vim.o.cmdheight = 1
@@ -6,8 +8,6 @@ vim.o.showmode = false
 vim.o.showtabline = 2 -- Always show tabline
 vim.o.title = true
 vim.o.termguicolors = true -- Use true colors, required for some plugins
--- vim.o.ls                 = 0                         -- Doesn't seem to work
--- vim.o.ch                 = 0                         -- Creates a bug with output messages not appearing correctly
 vim.wo.number = true
 vim.wo.signcolumn = "yes"
 vim.wo.cursorline = true
