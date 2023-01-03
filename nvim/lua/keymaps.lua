@@ -36,3 +36,12 @@ map("i", "<C-l>", function()
     ls.change_choice(1)
   end
 end, { silent = true })
+
+-- NvimTree
+map("n", "<C-n>", ":NvimTreeToggle<CR>") -- open/close
+map("n", "<leader>f", ":NvimTreeRefresh<CR>") -- refresh
+map("n", "<leader>n", ":NvimTreeFindFile<CR>") -- search file
+
+-- Bufferline
+map("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", {})
+map("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", {})

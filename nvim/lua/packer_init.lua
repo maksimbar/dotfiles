@@ -35,6 +35,7 @@ return packer.startup(function(use)
   -- Null-ls
   use("jose-elias-alvarez/null-ls.nvim")
 
+  -- Let packer manage itself
   use("wbthomason/packer.nvim")
 
   -- Luasnip
@@ -42,6 +43,8 @@ return packer.startup(function(use)
 
   -- Theme
   use("sainnhe/everforest")
+
+  -- LaTeX support
   use("lervag/vimtex")
 
   -- LSP
@@ -96,6 +99,24 @@ return packer.startup(function(use)
 
   -- Colorizer
   use("norcalli/nvim-colorizer.lua")
+
+  -- Autotag
+  use("windwp/nvim-ts-autotag")
+
+  -- Lualine
+  use("nvim-lualine/lualine.nvim")
+
+  -- Tree
+  use({
+    "nvim-tree/nvim-tree.lua",
+    requires = {
+      "nvim-tree/nvim-web-devicons", -- optional, for file icons
+    },
+    tag = "nightly", -- optional, updated every week. (see issue #1193)
+  })
+
+  -- Buffeline
+  use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 
   if packer_bootstrap then
     require("packer").sync()

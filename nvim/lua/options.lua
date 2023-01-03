@@ -9,6 +9,7 @@ vim.o.showtabline = 2 -- Always show tabline
 vim.o.title = true
 vim.o.termguicolors = true -- Use true colors, required for some plugins
 vim.wo.number = true
+vim.o.relativenumber = true
 vim.wo.signcolumn = "yes"
 vim.wo.cursorline = true
 
@@ -26,7 +27,7 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.scrolloff = 12 -- Minimum offset in lines to screen borders
 vim.o.sidescrolloff = 8
-vim.o.mouse = "a"
+vim.o.mouse = nil
 
 -- Vim specific
 vim.o.hidden = true -- Do not save when switching buffers
@@ -48,3 +49,7 @@ vim.g.vimtex_quickfix_mode = 1
 vim.g.tex_conceal = "abdmgs"
 vim.g.indentLine_setConceal = 1
 vim.g.vimtex_compiler_latexmk_engines = { _ = "-lualatex" }
+
+-- backup/swap files
+vim.opt.swapfile = false -- have files saved to swap
+vim.opt.undofile = true -- file undo history preserved outside current session
