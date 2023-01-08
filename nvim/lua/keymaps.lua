@@ -37,7 +37,7 @@ map("i", "<C-l>", function()
   end
 end, { silent = true })
 
--- Telescope File Explorer
+-- Telescope file explorer
 map("n", "<C-n>", ":Telescope file_browser<CR>") -- open/close
 
 -- Bufferline

@@ -1,6 +1,9 @@
--- require("bufferline")
+local status, bufferline = pcall(require, "bufferline")
+if not status then
+  return
+end
 
-require("bufferline").setup({
+bufferline.setup({
   options = {
     always_show_bufferline = true,
     show_buffer_icons = true,
@@ -8,7 +11,6 @@ require("bufferline").setup({
     show_close_icon = false,
     separator_style = "thin",
   },
-  -- Don't use italic on current buffer
   highlights = {
     fill = {
       fg = "#374247",

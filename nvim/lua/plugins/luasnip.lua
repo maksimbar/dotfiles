@@ -1,6 +1,5 @@
-local ok, ls = pcall(require, "luasnip")
-if not ok then
-  print("Failed to load LuaSnip")
+local status, luasnip = pcall(require, "luasnip")
+if not status then
   return
 end
 
@@ -10,7 +9,7 @@ local types = require("luasnip.util.types")
 require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets" })
 require("luasnip.loaders.from_vscode").lazy_load()
 
-ls.config.set_config({
+luasnip.config.set_config({
   history = true,
   update_events = "InsertLeave",
   region_check_events = "CursorHold,InsertLeave",

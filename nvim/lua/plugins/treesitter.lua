@@ -1,21 +1,7 @@
--- local present, ts_config = pcall(require, "nvim-treesitter.configs")
--- if not present then
---   return
--- end
---
--- ts_config.setup({
---   ensure_installed = {
---     "lua",
---   },
---   highlight = {
---     enable = true,
---     use_languagetree = true,
---   },
--- })
-
-
 local status, ts = pcall(require, "nvim-treesitter.configs")
-if (not status) then return end
+if not status then
+  return
+end
 
 ts.setup {
   highlight = {

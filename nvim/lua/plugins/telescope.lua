@@ -1,7 +1,12 @@
+local status, telescope = pcall(require, "telescope")
+if not status then
+  return
+end
+
 local actions = require("telescope.actions")
 local fb_actions = require "telescope".extensions.file_browser.actions
 
-require("telescope").setup({
+telescope.setup({
   defaults = {
     mappings = {
       i = {

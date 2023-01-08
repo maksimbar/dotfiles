@@ -2,7 +2,6 @@
 
 -- Visual
 vim.o.conceallevel = 0 -- Don't hide quotes in markdown
--- vim.o.cmdheight = 2
 vim.o.pumheight = 10
 vim.o.showmode = false
 vim.o.showtabline = 2 -- Always show tabline
