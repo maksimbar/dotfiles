@@ -45,21 +45,28 @@ promptinit
 setopt PROMPT_SUBST
 PROMPT='%F{13}%n%f %F{15}in %U${PWD/#$HOME/~}%u ${vcs_info_msg_0_} > '
 
-## case-insensitive,partial-word and then substring completion
+# case-insensitive,partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # useful aliases
 alias ls='ls -lah --color=auto'
 alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias vpn='wg-quick up nl1-wireguard'
+
+link() {
+  ln -nfs $1 $2
+}
+
+# fzf things
+source "/usr/share/fzf/key-bindings.zsh"
+source "/usr/share/fzf/completion.zsh"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-z/zsh-z.plugin.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH=/home/max/.cargo/bin:$PATH
+export TERM='xterm-256color'

@@ -2,12 +2,12 @@
 
 -- Visual
 vim.o.conceallevel = 0 -- Don't hide quotes in markdown
-vim.o.cmdheight = 1
+-- vim.o.cmdheight = 2
 vim.o.pumheight = 10
 vim.o.showmode = false
 vim.o.showtabline = 2 -- Always show tabline
 vim.o.title = true
-vim.o.termguicolors = true -- Use true colors, required for some plugins
+vim.opt.termguicolors = true -- Use true colors, required for some plugins
 vim.wo.number = true
 vim.o.relativenumber = true
 vim.wo.signcolumn = "yes"
@@ -48,7 +48,7 @@ vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_quickfix_mode = 1
 vim.g.tex_conceal = "abdmgs"
 vim.g.indentLine_setConceal = 1
-vim.g.vimtex_compiler_latexmk_engines = { _ = "-lualatex" }
+-- vim.g.vimtex_compiler_latexmk_engines = { _ = "-lualatex" }
 
 -- backup/swap files
 vim.opt.swapfile = false -- have files saved to swap

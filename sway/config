@@ -11,7 +11,7 @@ set $right l
 set $laptop eDP-1
 set $hdmi HDMI-A-1
 
-set $term kitty
+set $term alacritty 
 
 set $wofi ~/.local/bin/launch-wofi.sh
 set $tofi ~/.local/bin/launch-tofi.sh
@@ -19,12 +19,12 @@ set $poweroff ~/.local/bin/poweroff.sh
 set $getsnippets cat ~/.local/share/snippets | tofi --config ~/.config/tofi/snippets | wl-copy
 set $writesnippet ~/.local/bin/snippets.sh
 set $hyprpicker ~/.local/bin/hyprpicker.sh
-set $vim-cheatsheet kitty nvim ~/Documents/vim-cheatsheet.md
+set $vim-cheatsheet alacritty -e nvim ~/Documents/vim-cheatsheet.md
 
 output {
     $hdmi pos 1920 0 res 1920x1080
     $laptop pos 0 0 res 1920x1080
-    * background ~/.config/sway-theme/everforest/everforest.jpg fill
+    * background ~/.config/sway-theme/everforest/main.* fill
 }
 
 bindswitch {
@@ -52,8 +52,9 @@ input type:keyboard {
 assign [class="jetbrains-clion"] 1
 assign [class="code-oss"] 1
 
-for_window [app_id="google-chrome"] move to workspace 3
+for_window [app_id="chromium"] move to workspace 3
 for_window [app_id="anki"] move to workspace 5, floating enable, resize set 70 ppt 70 ppt
+for_window [app_id="calendar"] floating enable, resize set 75 ppt 75 ppt
 for_window [class="discord"] move to workspace 9
 for_window [app_id="thunderbird"] move to workspace 10
 
@@ -81,16 +82,27 @@ workspace {
 # bind XF86 keys
 bindsym --to-code {
     # volume controls
-    XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% # increase sound volume
-    XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% # decrease sound volume
-    XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # toggle mute sound
+    # XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% # increase sound volume
+    # XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% # decrease sound volume
+    # XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # toggle mute sound
 
     # sreen brightness controls
-    XF86MonBrightnessUp exec light -T 1.4  # increase screen brightness
-    XF86MonBrightnessDown exec light -T 0.72  # decrease screen brightness
+    # XF86MonBrightnessUp exec light -T 1.4  # increase screen brightness
+    # XF86MonBrightnessDown exec light -T 0.72  # decrease screen brightness
 
     # mute mic
-    XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    # XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+
+
+ XF86AudioRaiseVolume exec volumectl -u up
+ XF86AudioLowerVolume exec volumectl -u down
+ XF86AudioMute exec volumectl toggle-mute
+ XF86AudioMicMute exec volumectl -m toggle-mute
+
+ XF86MonBrightnessUp exec lightctl up
+ XF86MonBrightnessDown exec lightctl down
+
 }
 
 #waybar
@@ -113,6 +125,8 @@ exec {
     mpris-proxy
     # better sounding mic
     easyeffects --gapplication-service
+    # notification daemon for media stuff
+    avizo-service
 }
 
 # toggle floating and between floating and other windows
@@ -136,7 +150,7 @@ bindsym --to-code {
     $mod+bracketright exec $writesnippet
 
     # ranger
-    $mod+r exec kitty -e ranger
+    $mod+r exec alacritty -e ranger
 
     # thunderbird
     $mod+m exec thunderbird
@@ -151,8 +165,8 @@ bindsym --to-code {
     $mod+Shift+r reload
 
     # calendar
-    $mod+Shift+c exec kitty calcure
-
+    $mod+Shift+c exec alacritty --class calendar -e calcure 
+    
     # launch firefox
     $mod+Shift+w exec firefox
 
@@ -238,15 +252,15 @@ bindsym --to-code {
 include ~/.config/sway-theme/everforest/base16.config
 
 #                       Border  BG      Text    Ind     Child Border
-client.focused          $base05 $base0B $base00 $base0B $base0B
+client.focused          $base05 $base0D $base00 $base0D $base0D
 client.focused_inactive $base01 $base01 $base05 $base01 $base01
 client.unfocused        $base01 $base00 $base05 $base01 $base01
 client.urgent           $base08 $base08 $base00 $base08 $base08
 
 default_border pixel 3
-gaps outer 5
-gaps inner 5
+gaps outer 3
+gaps inner 9
 smart_borders on
-smart_gaps on
+# smart_gaps on
 
 include /etc/sway/config.d/*

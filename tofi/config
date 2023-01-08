@@ -14,8 +14,8 @@ result-spacing=20
 
 background-color=#2b3339
 selection-color=#2b3339
-selection-background=#dbbc7f
-text-color=#dbbc7f
+selection-background=#a7c080
+text-color=#d3c6aa
 selection-padding=12
 
 padding-top=4

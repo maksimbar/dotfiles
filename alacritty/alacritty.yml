@@ -1,0 +1,103 @@
+env:
+  TERM: xterm-256color
+
+shell:
+  program: /bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux attach || tmux"
+
+window:
+  padding:
+    x: 20
+    y: 20
+
+font:
+  normal:
+    family: Hack Nerd Font Mono
+    style: Regular
+
+  bold:
+    family: Hack Nerd Font Mono
+    style: Bold
+
+  italic:
+    family: Hack Nerd Font Mono
+    style: Italic
+
+  bold_italic:
+    family: Hack Nerd Font Mono
+    style: Bold Italic
+
+  size: 12
+
+schemes:
+  everforest_dark_hard: &everforest_dark_hard
+    primary:
+      background: "#272e33"
+      foreground: "#d3c6aa"
+    normal:
+      black: "#414b50"
+      red: "#e67e80"
+      green: "#a7c080"
+      yellow: "#dbbc7f"
+      blue: "#7fbbb3"
+      magenta: "#d699b6"
+      cyan: "#83c092"
+      white: "#d3c6aa"
+    bright:
+      black: "#475258"
+      red: "#e67e80"
+      green: "#a7c080"
+      yellow: "#dbbc7f"
+      blue: "#7fbbb3"
+      magenta: "#d699b6"
+      cyan: "#83c092"
+      white: "#d3c6aa"
+  everforest_dark_medium: &everforest_dark_medium
+    primary:
+      background: "#2d353b"
+      foreground: "#d3c6aa"
+    normal:
+      black: "#475258"
+      red: "#e67e80"
+      green: "#a7c080"
+      yellow: "#dbbc7f"
+      blue: "#7fbbb3"
+      magenta: "#d699b6"
+      cyan: "#83c092"
+      white: "#d3c6aa"
+    bright:
+      black: "#475258"
+      red: "#e67e80"
+      green: "#a7c080"
+      yellow: "#dbbc7f"
+      blue: "#7fbbb3"
+      magenta: "#d699b6"
+      cyan: "#83c092"
+      white: "#d3c6aa"
+  everforest_dark_soft: &everforest_dark_soft
+    primary:
+      background: "#333c43"
+      foreground: "#d3c6aa"
+    normal:
+      black: "#4d5960"
+      red: "#e67e80"
+      green: "#a7c080"
+      yellow: "#dbbc7f"
+      blue: "#7fbbb3"
+      magenta: "#d699b6"
+      cyan: "#83c092"
+      white: "#d3c6aa"
+    bright:
+      black: "#4d5960"
+      red: "#e67e80"
+      green: "#a7c080"
+      yellow: "#dbbc7f"
+      blue: "#7fbbb3"
+      magenta: "#d699b6"
+      cyan: "#83c092"
+      white: "#d3c6aa"
+
+colors: *everforest_dark_soft

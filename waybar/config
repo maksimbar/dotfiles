@@ -5,7 +5,7 @@
     "layer": "bottom",
     "position": "top",
     "modules-left":["sway/workspaces"],
-    "modules-right": ["tray","network#wifi","backlight","battery", "pulseaudio#sink","pulseaudio#source","sway/language","memory","custom/gammastep","custom/pomodoro","clock"],
+    "modules-right": ["tray","backlight","battery", "pulseaudio#sink","pulseaudio#source","sway/language","memory","clock"],
 
    "sway/window": {
         "max-length": 60,

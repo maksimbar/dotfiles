@@ -44,12 +44,12 @@ window {
 }
 
 #entry:selected {
-  background-color: @base0B;
+  background-color: @base0D;
   font-weight: normal;
 }
 
 #text:selected {
-  background-color: @base0B;
+  background-color: @base0D;
   font-weight: normal;
   color: @base00;
 }

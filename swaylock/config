@@ -1,4 +1,4 @@
-image= ~/.config/sway-theme/everforest/everforest.jpg
+image= ~/.config/sway-theme/everforest/main.*
 
 ignore-empty-password
 

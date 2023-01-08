@@ -106,17 +106,11 @@ return packer.startup(function(use)
   -- Lualine
   use("nvim-lualine/lualine.nvim")
 
-  -- Tree
-  use({
-    "nvim-tree/nvim-tree.lua",
-    requires = {
-      "nvim-tree/nvim-web-devicons", -- optional, for file icons
-    },
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
-  })
-
   -- Buffeline
   use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
+
+  -- File Explorer
+  use 'nvim-telescope/telescope-file-browser.nvim'
 
   if packer_bootstrap then
     require("packer").sync()

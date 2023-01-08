@@ -37,11 +37,20 @@ map("i", "<C-l>", function()
   end
 end, { silent = true })
 
--- NvimTree
-map("n", "<C-n>", ":NvimTreeToggle<CR>") -- open/close
-map("n", "<leader>f", ":NvimTreeRefresh<CR>") -- refresh
-map("n", "<leader>n", ":NvimTreeFindFile<CR>") -- search file
+-- Telescope File Explorer
+map("n", "<C-n>", ":Telescope file_browser<CR>") -- open/close
 
 -- Bufferline
 map("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", {})
 map("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", {})
+
+-- Split window
+map('n', 'ss', ':split<Return><C-w>w')
+map('n', 'sv', ':vsplit<Return><C-w>w')
+
+-- Move window
+map('n', '<Space>', '<C-w>w')
+map('', 'sh', '<C-w>h')
+map('', 'sk', '<C-w>k')
+map('', 'sj', '<C-w>j')
+map('', 'sl', '<C-w>l')

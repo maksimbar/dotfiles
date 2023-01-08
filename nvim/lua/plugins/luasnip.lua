@@ -8,6 +8,7 @@ local types = require("luasnip.util.types")
 
 -- Loads in snippets
 require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets" })
+require("luasnip.loaders.from_vscode").lazy_load()
 
 ls.config.set_config({
   history = true,
