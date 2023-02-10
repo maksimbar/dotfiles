@@ -47,8 +47,9 @@ vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_quickfix_mode = 1
 vim.g.tex_conceal = "abdmgs"
 vim.g.indentLine_setConceal = 1
--- vim.g.vimtex_compiler_latexmk_engines = { _ = "-lualatex" }
-
+vim.g.vimtex_compiler_engine = 'lualatex'
+vim.g.vimtex_compiler_latexmk_engines = { _ = '-lualatex' }
+vim.g.vimtex_compiler_latexrun_engines = { _ = 'lualatex' }
 -- backup/swap files
 vim.opt.swapfile = false -- have files saved to swap
 vim.opt.undofile = true -- file undo history preserved outside current session
