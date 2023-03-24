@@ -112,6 +112,12 @@ return packer.startup(function(use)
   -- File Explorer
   use 'nvim-telescope/telescope-file-browser.nvim'
 
+  -- Markdown Preview
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
   if packer_bootstrap then
     require("packer").sync()
   end

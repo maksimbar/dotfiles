@@ -7,6 +7,15 @@ return {
     i(0),
     t(")"),
   }),
+  -- Markdown: Hidden details
+  s("det", {
+    t({ "<details>" }),
+    t({ "", "\t<summary>" }),
+    i(1),
+    t({ "</summary>", "\t" }),
+    i(2),
+    t({ "", "</details>" }),
+  }),
   -- Markdown: Left arrow
   s("<-", t("←")),
   -- Markdown: Right arrow
