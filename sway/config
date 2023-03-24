@@ -19,7 +19,7 @@ set $poweroff ~/.local/bin/poweroff.sh
 set $getsnippets cat ~/.local/share/snippets | tofi --config ~/.config/tofi/snippets | wl-copy
 set $writesnippet ~/.local/bin/snippets.sh
 set $hyprpicker ~/.local/bin/hyprpicker.sh
-set $vim-cheatsheet alacritty -e nvim ~/Documents/vim-cheatsheet.md
+set $ocr ~/.local/bin/ocr.sh
 
 output {
     $hdmi pos 1920 0 res 1920x1080
@@ -32,9 +32,9 @@ bindswitch {
     --locked lid:off output $laptop enable
 }
 
-exec swayidle -w \
-          timeout 600 'swaylock -f' \
-          before-sleep 'swaylock -f'
+# exec swayidle -w \
+#           timeout 600 'swaylock -f' \
+#           before-sleep 'swaylock -f'
 
 input type:touchpad {
     dwt enabled
@@ -53,10 +53,18 @@ assign [class="jetbrains-clion"] 1
 assign [class="code-oss"] 1
 
 for_window [app_id="chromium"] move to workspace 3
-for_window [app_id="anki"] move to workspace 5, floating enable, resize set 70 ppt 70 ppt
+for_window [app_id="anki"] floating enable, resize set 70 ppt 70 ppt
 for_window [app_id="calendar"] floating enable, resize set 75 ppt 75 ppt
+for_window [app_id="dijo"] floating enable, resize set 75 ppt 75 ppt
+for_window [app_id="com.github.tenderowl.frog"] floating enable, resize set 30 ppt 50 ppt
+for_window [app_id="gnome.pomodoro"] floating enable, resize set 30 ppt 50 ppt
 for_window [class="discord"] move to workspace 9
 for_window [app_id="thunderbird"] move to workspace 10
+for_window [app_id="org.gnome.Nautilus"] floating enable, resize set 90 ppt 90 ppt
+for_window [app_id="org.gnome.Calculator"] floating enable, resize set 30 ppt 50 ppt
+for_window [app_id="blueberry.py"] floating enable, resize set 30 ppt 50 ppt
+
+
 
 set $ps1 Print
 set $ps2 Control+Print
@@ -67,9 +75,15 @@ set $psf $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
 bindsym --to-code {
     $ps1 exec grim -g "$(slurp)" - | swappy -f -
     $ps2 exec grim -g "$(slurp)" - | wl-copy
-    $ps3 exec grim $psf
-    $ps4 exec grim -g "$(slurp)" $psf
+    # $ps3 exec grim $psf
+    # $ps4 exec grim -g "$(slurp)" $psf
 }
+
+# Current window to clipboard
+bindsym Alt+Print exec grimshot --notify copy active
+
+# Current window to file
+bindsym $mod+Alt+Print exec grimshot --notify save active
 
 workspace {
   1 output $hdmi
@@ -80,35 +94,33 @@ workspace {
 }
 
 # bind XF86 keys
-bindsym --to-code {
+bindsym {
     # volume controls
-    # XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% # increase sound volume
-    # XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% # decrease sound volume
-    # XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # toggle mute sound
+    XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% # increase sound volume
+    XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% # decrease sound volume
+    
+    $mod+XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% # increase sound volume
+    $mod+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% # decrease sound volume
+
+    XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # toggle mute sound
 
     # sreen brightness controls
-    # XF86MonBrightnessUp exec light -T 1.4  # increase screen brightness
-    # XF86MonBrightnessDown exec light -T 0.72  # decrease screen brightness
+    XF86MonBrightnessUp exec light -T 1.4  # increase screen brightness
+    XF86MonBrightnessDown exec light -T 0.72  # decrease screen brightness
 
     # mute mic
-    # XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-
-
- XF86AudioRaiseVolume exec volumectl -u up
- XF86AudioLowerVolume exec volumectl -u down
- XF86AudioMute exec volumectl toggle-mute
- XF86AudioMicMute exec volumectl -m toggle-mute
-
- XF86MonBrightnessUp exec lightctl up
- XF86MonBrightnessDown exec lightctl down
-
+    XF86Calculator exec gnome-calculator 
 }
+
 
 #waybar
 bar {
   swaybar_command waybar
   workspace_buttons yes
+  gaps 10 10
+  position bottom
 }
 
 # different window layout
@@ -125,17 +137,12 @@ exec {
     mpris-proxy
     # better sounding mic
     easyeffects --gapplication-service
-    # notification daemon for media stuff
-    avizo-service
 }
 
 # toggle floating and between floating and other windows
 bindsym --whole-window $mod+BTN_MIDDLE floating toggle
 
 bindsym --to-code {
-
-    # vim cheat sheet 
-    F12 exec $vim-cheatsheet
 
     # switch language
     $mod+space exec swaymsg input type:keyboard xkb_switch_layout next
@@ -161,6 +168,9 @@ bindsym --to-code {
     # terminal
     $mod+Return exec $term
 
+    # term + tmux
+    $mod+Shift+Return exec $term -e tmux attach || tmux
+
     # reload this config file
     $mod+Shift+r reload
 
@@ -181,6 +191,12 @@ bindsym --to-code {
 
     # select color picker with format selection via tofi
     $mod+Shift+p exec $hyprpicker
+
+    # dijo
+    $mod+Shift+d exec alacritty --class dijo -e dijo
+
+    # ocr
+    $mod+o exec $ocr 
 
     $mod+$left focus left
     $mod+$down focus down
@@ -244,8 +260,8 @@ bindsym --to-code {
     $mod+Shift+i resize grow height 50px
 
     # scatchpad
-    $mod+Shift+n move scratchpad
-    $mod+Shift+m scratchpad show
+    $mod+grave scratchpad show
+    $mod+Shift+grave move scratchpad
 
 }
 
