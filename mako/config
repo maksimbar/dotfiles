@@ -1,18 +1,22 @@
 max-history=5
 max-visible=3
 
-border-color=#503946
-background-color=#2b3339
-text-color=#fff9e8
+border-color=#ffffff26
+background-color=#303446AA
+text-color=#dcdcdc
 
-anchor=bottom-right
-font=monospace 10
-width=350
-margin=0,20,20
+margin=0,20,20,0
+outer-margin=0,10,10,0
 padding=10
-border-size=2
-border-radius=5
+
+width=350
+layer=overlay
+anchor=bottom-right
+font=Inter Nerd Font 10
+border-size=1
+border-radius=10
 default-timeout=10000
+sort=-time
 group-by=summary
 
 [grouped]
